@@ -1,0 +1,18 @@
+#!/bin/bash
+filename="$1"
+dir="$PWD"
+
+if [[ $filename =~ ".DOS" ]]; then
+    filename=${filename%.DOS}
+elif [[ "$filename" =~ "." ]]; then
+    filename=${filename%.}
+fi
+
+searchPath=$dir/$filename'.DOS'
+
+if [ ! -e "$searchPath" ]; then
+    echo "File does not exist..."
+    exit 0
+fi
+
+python /usr/local/bin/plot-dos.py $filename
